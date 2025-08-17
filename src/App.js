@@ -4,17 +4,18 @@ import Uploader from "./components/Uploader";
 import ControlsPanel from "./components/ControlsPanel";
 import ImageCard from "./components/ImageCard";
 import Footer from "./components/Footer";
+import AdSlot from "./components/AdSlot";
 import JSZip from "jszip";
 import { saveAs } from "file-saver";
 import { compressOnce, compressToTarget } from "./utils/compress";
 import { sanitizeFileName } from "./utils/format";
 
 export default function App() {
-  const [items, setItems] = useState([]); // {id, file, previewUrl, origWidth, origHeight, processed?, progress}
+  const [items, setItems] = useState([]);
   const [busy, setBusy] = useState(false);
 
   // Controls
-  const [mode, setMode] = useState("quality"); // quality | target
+  const [mode, setMode] = useState("quality"); 
   const [quality, setQuality] = useState(0.8);
   const [outFormat, setOutFormat] = useState("auto");
   const [width, setWidth] = useState(null);
@@ -38,7 +39,6 @@ export default function App() {
       progress: 0,
     }));
 
-    // Measure original dimensions async
     newOnes.forEach((it) => {
       const img = new Image();
       img.onload = () => {
@@ -160,10 +160,8 @@ export default function App() {
             disabled={!items.length || busy}
           />
 
-          {/* Ad slot placeholder */}
-          <div className="ts-ad-slot" aria-label="ad">
-            {/* After AdSense approval, place <ins class="adsbygoogle">…</ins> here */}
-          </div>
+          {/* ✅ AdSense slot */}
+          <AdSlot adSlotId="1234567890" /> {/* Replace 1234567890 with your Ad Slot ID */}
 
           <section className="ts-actions-bar">
             {items.length > 0 && (
